@@ -5,13 +5,13 @@ import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   return (
-    <Fragment>
+    <div className="">
       <Header />
       <div className="flex">
         <Sidebar />
         <AllChats />
       </div>
-    </Fragment>
+    </div>
   );
 }
 
