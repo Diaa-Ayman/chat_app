@@ -9,7 +9,7 @@ import {
 
 function Sidebar() {
   return (
-    <div className="text-white md:w-40 lg:w-48 m-4 mt-6">
+    <div className="text-white md:w-40  m-4 mt-6">
       <ul>
         <li className="sidebar-item">
           <span>
