@@ -49,24 +49,24 @@ export default function Header() {
           </li>
         </ul>
       </div>
-      <div className="flex items-center space-x-12">
+      <div className="flex items-center space-x-6 lg:space-x-12">
         <div className="flex items-center space-x-2">
           <span className="p-2 hover:bg-gray-500 hover:cursor-pointer rounded-full">
-            <PhoneIcon className="w-5 h-5 md:w-6 md:h-6" />
+            <PhoneIcon className="w-6 h-6" />
           </span>
           <span className="p-2 hover:bg-gray-500 hover:cursor-pointer rounded-full">
             <BellIcon className="w-6 h-6" />
           </span>
         </div>
         <div className="current-chat flex items-center space-x-1">
-          <div className="info flex flex-col text-right text-gray-200 text-xs md:text-sm">
+          <div className="info hidden lg:flex flex-col text-right text-gray-200 text-xs md:text-sm">
             <span className="">
               Welcome, <span className="font-semibold">Diaa Ayman</span>
             </span>
             <span className="text-xs text-gray-400">abugam21@gmail.com</span>
           </div>
           <img
-            className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover hover:opacity-90 cursor-pointer"
+            className="w-8 h-8 md:w-12 md:h-12 lg:w-10 lg:h-10 rounded-full object-cover hover:opacity-90 cursor-pointer"
             src="https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg"
           />
         </div>

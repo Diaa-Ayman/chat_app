@@ -5,12 +5,24 @@ import {
   NoSymbolIcon,
   ChatBubbleLeftRightIcon,
   TrashIcon,
+  Bars3Icon,
 } from "@heroicons/react/24/outline";
 
 function Sidebar() {
   return (
-    <div className="text-white md:w-40  m-2 md:m-4 mt-6">
+    <div className="text-white w-0 md:w-40  m-2 md:m-4 mt-6">
       <ul>
+        <li className="sidebar-item md:hidden">
+          <button
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseWidthExample"
+            aria-expanded="false"
+            aria-controls="collapseWidthExample"
+          >
+            <Bars3Icon className="header-icon" />
+          </button>
+        </li>
         <li className="sidebar-item">
           <span>
             <ClockIcon className="header-icon" />

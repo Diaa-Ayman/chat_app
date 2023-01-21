@@ -4,7 +4,8 @@ import {
   PaperClipIcon,
   PaperAirplaneIcon,
   PhotoIcon,
-  FaceSmileIcon
+  FaceSmileIcon,
+  MicrophoneIcon
 } from "@heroicons/react/24/outline";
 export default function LiveChat() {
 
@@ -34,13 +35,14 @@ export default function LiveChat() {
       </div>
       <footer className="livechat-footer flex  space-x-2 items-center bg-gray-700  p-2 m-2 rounded-xl h-12">
       <input placeholder="Write a message!" className="flex-1 p-1 placeholder:text-sm rounded-xl bg-gray-700 outline-none border-none text-white" />
-        <div className = 'icons flex items-center space-x-1'>
+        <div className = 'icons flex items-center space-x-2'>
+          <MicrophoneIcon className="header-icon" />
           <FaceSmileIcon className="header-icon"/>
           <PaperClipIcon className="header-icon" />
           <PhotoIcon className="header-icon" />
         </div>
         <button className="bg-yellow-200 p-2 cursor-pointer hover:bg-yellow-300 rounded-xl">
-          <PaperAirplaneIcon className="header-icon text-black"/>
+          <PaperAirplaneIcon className="header-icon text-black font-bold"/>
         </button>
       </footer>
     </div>

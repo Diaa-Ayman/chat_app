@@ -8,19 +8,23 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: black;
+  overflow-y: hidden;
 }
 
 @layer components {
   .header-item {
-    @apply rounded-md space-x-0 md:space-x-2 flex items-center text-sm hover:bg-gray-500 hover:cursor-pointer p-3 md:p-4 text-gray-300;
+    @apply rounded-md space-x-0 md:space-x-2 flex items-center text-xs lg:text-sm hover:bg-gray-500 hover:cursor-pointer p-3 md:p-4 text-gray-300;
   }
   .header-icon {
-    @apply w-5 h-5 text-gray-300;
+    @apply w-5 h-5 text-gray-300 cursor-pointer;
   }
   .sidebar-item {
     @apply space-x-2 flex items-center text-sm hover:bg-gray-500 hover:cursor-pointer p-4 rounded-md text-gray-400;
   }
   .hidden-up {
     @apply hidden md:block;
+  }
+  .icon-container {
+    @apply cursor-pointer hover:bg-indigo-400 rounded-2xl p-2 w-fit bg-indigo-500;
   }
 }
