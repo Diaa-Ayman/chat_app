@@ -1,10 +1,13 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Chat from "./Chat";
+import * as EmailValidator from "email-validator";
 function AllChats() {
   const addNewChatHandler = () => {
-    const input = prompt("Enter Chat Email!");
-
-    if (!input) return;
+    const chatEmail = prompt("Enter Chat Email!");
+    if (!chatEmail) return null;
+    if (EmailValidator.validate(chatEmail)) {
+      // add the chat to db...
+    }
   };
   return (
     <div className="flex-col space-y-4 hidden lg:flex md:w-40 lg:w-auto">
