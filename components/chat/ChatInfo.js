@@ -35,7 +35,10 @@ function ChatInfo() {
       <div className="data mt-6 space-y-2">
         {["Attachments", "Links", "All Vacancies", "Appointments"].map(
           (ele) => (
-            <div className="flex justify-center md:justify-between hover:bg-gray-700 p-2 rounded-lg cursor-pointer">
+            <div
+              key={ele}
+              className="flex justify-center md:justify-between hover:bg-gray-700 p-2 rounded-lg cursor-pointer"
+            >
               <span className="text-gray-300 hidden md:flex">{ele}</span>
               <div>
                 <ChevronDownIcon className="header-icon" />

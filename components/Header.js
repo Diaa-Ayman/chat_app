@@ -8,14 +8,19 @@ import {
   BellIcon,
   PhoneIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 export default function Header() {
   return (
     <div className="px-4 md:px-6 lg:px-8 flex justify-between py-1 items-center bg-gray-800 text-gray-300">
       <div className="flex items-center">
-        <span className="m-2 text-xs md:text-md lg:text-base cursor-pointer">
-          Ne
-          <span className="font-semibold text-md  text-gray-100">Workers</span>
-        </span>
+        <Link href="/">
+          <span className="m-2 text-xs md:text-md lg:text-base cursor-pointer">
+            Ne
+            <span className="font-semibold text-md  text-gray-100">
+              Workers
+            </span>
+          </span>
+        </Link>
         <ul className="hidden md:flex items-center text-sm ml-3 md:ml-6 lg:ml-10">
           <li className="header-item">
             <span>
@@ -35,12 +40,15 @@ export default function Header() {
             </span>
             <span className="hidden-up">Statistic</span>
           </li>
-          <li className="header-item">
-            <span>
-              <ChatBubbleBottomCenterTextIcon className="header-icon" />
-            </span>
-            <span className="hidden-up">Chats</span>
-          </li>
+          <Link href="/chats">
+            <li className="header-item">
+              <span>
+                <ChatBubbleBottomCenterTextIcon className="header-icon" />
+              </span>
+              <span className="hidden-up">Chats</span>{" "}
+            </li>
+          </Link>
+
           <li className="header-item">
             <span>
               <Squares2X2Icon className="header-icon" />
