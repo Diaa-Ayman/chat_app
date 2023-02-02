@@ -1,12 +1,18 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Chat from "./Chat";
 import * as EmailValidator from "email-validator";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, db } from "../../firebase";
 function AllChats() {
+  const [user] = useAuthState(auth);
   const addNewChatHandler = () => {
     const chatEmail = prompt("Enter Chat Email!");
     if (!chatEmail) return null;
     if (EmailValidator.validate(chatEmail)) {
       // add the chat to db...
+      db.collection("chats").add({
+        chatTeam: [user.email, chatEmail],
+      });
     }
   };
   return (

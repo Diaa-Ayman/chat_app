@@ -7,11 +7,15 @@ import {
   TrashIcon,
   Bars3Icon,
 } from "@heroicons/react/24/outline";
+import { auth } from "../firebase";
 
 function Sidebar() {
+  const logoutHandler = () => {
+    auth.signOut();
+  };
   return (
-    <div className="text-white w-0 md:w-40  m-2 md:m-4 mt-6">
-      <ul>
+    <div className="flex flex-col text-white w-0 md:w-40  m-2 md:m-4 mt-6">
+      <ul className="flex-1">
         <li className="sidebar-item md:hidden">
           <button
             type="button"
@@ -60,6 +64,14 @@ function Sidebar() {
           <span className="hidden-up">Trash</span>
         </li>
       </ul>
+      <div>
+        <button
+          onClick={logoutHandler}
+          className="py-1 px-8 text-lg font-semibold bg-red-600 text-gray-100 hover:bg-gray-100  hover:text-gray-800 transition-all duration-300 rounded-2xl"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
