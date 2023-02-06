@@ -12,7 +12,6 @@ export default function Chat(props) {
     (user) => recipientEmail && user.email === recipientEmail[0]
   );
 
-  console.log(chatData);
   const { email, lastSeen, name, photoURL } = chatData
     ? chatData
     : {
