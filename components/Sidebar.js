@@ -14,7 +14,7 @@ function Sidebar() {
     auth.signOut();
   };
   return (
-    <div className="flex flex-col text-white w-0 md:w-40  m-2 md:m-4 mt-6">
+    <div className="hidden md:flex flex-col text-white md:w-40  m-2 md:m-4 mt-6">
       <ul className="flex-1">
         <li className="sidebar-item md:hidden">
           <button

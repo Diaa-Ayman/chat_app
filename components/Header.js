@@ -9,7 +9,10 @@ import {
   PhoneIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 export default function Header() {
+  const [user] = useAuthState(auth);
   return (
     <div className="px-4 md:px-6 lg:px-8 flex justify-between py-1 items-center bg-gray-800 text-gray-300">
       <div className="flex items-center">
@@ -69,13 +72,13 @@ export default function Header() {
         <div className="current-chat flex items-center space-x-1">
           <div className="info hidden lg:flex flex-col text-right text-gray-200 text-xs md:text-sm">
             <span className="">
-              Welcome, <span className="font-semibold">Diaa Ayman</span>
+              Welcome, <span className="font-semibold">{user.displayName}</span>
             </span>
-            <span className="text-xs text-gray-400">abugam21@gmail.com</span>
+            <span className="text-xs text-gray-400">{user.email}</span>
           </div>
           <img
             className="w-8 h-8 md:w-12 md:h-12 lg:w-10 lg:h-10 rounded-full object-cover hover:opacity-90 cursor-pointer"
-            src="https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg"
+            src={user.photoURL}
           />
         </div>
       </div>
