@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 import { auth, db } from "../../firebase";
@@ -21,20 +22,22 @@ export default function Chat(props) {
           "https://img.freepik.com/premium-vector/banned-icon-template-e_79145-490.jpg",
       };
   return (
-    <div
-      className={`text-gray-200 current-chat flex items-center hover:bg-gray-700 p-2 cursor-pointer space-x-2 ${props.className}`}
-    >
-      <img
-        className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover hover:opacity-90 cursor-pointer"
-        src={photoURL}
-      />
-      <div className="info flex flex-col text-gray-200 text-xs md:text-sm">
-        <div className="flex items-center">
-          <span className="font-semibold mr-6">{name}</span>
-          <div className="  h-2 w-2 rounded-full bg-green-500"></div>
+    <Link href={`/chats/${props.id}`} className="space-y-2">
+      <div
+        className={`text-gray-200 current-chat flex items-center hover:bg-gray-700 p-2 cursor-pointer space-x-2 ${props.className}`}
+      >
+        <img
+          className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover hover:opacity-90 cursor-pointer"
+          src={photoURL}
+        />
+        <div className="info flex flex-col text-gray-200 text-xs md:text-sm">
+          <div className="flex items-center">
+            <span className="font-semibold mr-6">{name}</span>
+            <div className="  h-2 w-2 rounded-full bg-green-500"></div>
+          </div>
+          <span className="text-xs text-gray-400">{email}</span>
         </div>
-        <span className="text-xs text-gray-400">{email}</span>
       </div>
-    </div>
+    </Link>
   );
 }

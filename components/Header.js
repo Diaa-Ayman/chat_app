@@ -44,7 +44,7 @@ export default function Header() {
             <span className="hidden-up">Statistic</span>
           </li>
           <Link href="/chats">
-            <li className="header-item">
+            <li className="header-item animate-pulse">
               <span>
                 <ChatBubbleBottomCenterTextIcon className="header-icon" />
               </span>
@@ -79,6 +79,7 @@ export default function Header() {
           <img
             className="w-8 h-8 md:w-12 md:h-12 lg:w-10 lg:h-10 rounded-full object-cover hover:opacity-90 cursor-pointer"
             src={user.photoURL}
+            alt="cannot load image"
           />
         </div>
       </div>

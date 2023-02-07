@@ -7,12 +7,30 @@ import {
   Bars3Icon,
 } from "@heroicons/react/24/outline";
 import Chat from "./Chat";
-function ChatInfo() {
+function ChatInfo({ chatData }) {
+  const { name, photoURL, email } = chatData ? chatData : {};
   return (
     <div className="">
       <div className="flex flex-bottom flex-col bg-indigo-600 p-1 md:p-2 lg:p-4  m-2 rounded-xl">
         <div className="hover:bg-indigo-500 cursor-pointer p-1 rounded-xl">
-          <Chat className="bg-indigo-600 hover:bg-indigo-500 p-0 mb-3 hidden md:flex" />
+          {/*Here is Start */}
+          <div
+            className={`text-gray-200 current-chat flex items-center hover:bg-gray-700 p-2 cursor-pointer space-x-2 `}
+          >
+            <img
+              className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover hover:opacity-90 cursor-pointer"
+              src={photoURL}
+            />
+            <div className="info flex flex-col text-gray-200 text-xs md:text-sm">
+              <div className="flex items-center">
+                <span className="font-semibold mr-6">{name}</span>
+                <div className="  h-2 w-2 rounded-full bg-green-500"></div>
+              </div>
+              <span className="text-xs text-gray-400">{email}</span>
+            </div>
+          </div>
+          {/* here is end */}
+          {/* <Chat className="bg-indigo-600 hover:bg-indigo-500 p-0 mb-3 hidden md:flex" /> */}
           <span className="job hidden md:block text-white px-2 py-1  rounded-lg text-xs  bg-indigo-500">
             UI/UX Designer
           </span>

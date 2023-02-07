@@ -15,7 +15,7 @@ function Sidebar() {
   };
   return (
     <div className="hidden md:flex flex-col text-white md:w-40  m-2 md:m-4 mt-6">
-      <ul className="flex-1">
+      <ul className="mb-40">
         <li className="sidebar-item md:hidden">
           <button
             type="button"

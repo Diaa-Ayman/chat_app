@@ -8,15 +8,16 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useState } from "react";
-function AllChats() {
+function AllChats(props) {
   const [user] = useAuthState(auth);
   const [chatIsThere, setChatIsThere] = useState(false);
   const userChatRef = db
     .collection("chats")
     .where("chatGroup", "array-contains", user.email);
   const [chatSnapshot] = useCollection(userChatRef);
-  const group = chatSnapshot?.docs.map((chat) => chat.data().chatGroup);
-  console.log(group);
+
+  // const group = chatSnapshot?.docs.map((chat) => chat.data().chatGroup);
+  // console.log(group);
 
   const addNewChatHandler = () => {
     const chatEmail = prompt("Enter Chat Email!");
@@ -45,9 +46,8 @@ function AllChats() {
             ?.length > 0
       );
   };
-
   return (
-    <div className="flex-col space-y-4 hidden lg:flex md:w-40 lg:w-auto">
+    <div className={`${props.className} flex-col space-y-4`}>
       <div className="search-bar flex p-2 items-center space-x-1 bg-gray-900 rounded-xl">
         <MagnifyingGlassIcon className="text-gray-400 w-4 h-4 md:w-5 md:h-5 cursor-pointer hover:text-gray-100" />
         <input
