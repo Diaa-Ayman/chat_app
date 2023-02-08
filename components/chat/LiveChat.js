@@ -7,28 +7,82 @@ import {
   FaceSmileIcon,
   MicrophoneIcon,
 } from "@heroicons/react/24/outline";
+import { Router, useRouter } from "next/router";
 import { useState } from "react";
-export default function LiveChat() {
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { auth, db } from "../../firebase";
+import Message from "../Message";
+import firebase from "firebase";
+export default function LiveChat({ chatData, messages }) {
   const [input, setInput] = useState("");
   const arr = [1, 2, 3, 4, 5, 6, 3, 3, 3, 3, 7, 8, 5, 4, 3, 4, 3];
+  const [user] = useAuthState(auth);
+  const router = useRouter();
+  const [messageSnapshot] = useCollection(
+    db
+      .collection("chats")
+      .doc(router.query.chatId)
+      .collection("messages")
+      .orderBy("timeStamp", "asc")
+  );
 
+  const showMessage = () => {
+    if (messageSnapshot) {
+      return messageSnapshot.docs.map((message) => (
+        <Message
+          key={message.id}
+          user={message.data().user}
+          message={{
+            ...message.data(),
+            timeStamp: message.data().timeStamp?.toDate().getTime(),
+          }}
+        />
+      ));
+    } else {
+      return JSON.parse(messages).map((message) => (
+        <Message key={message.id} user={message.user} message={message} />
+      ));
+    }
+  };
+  const { name, photoURL, lastSeen } = chatData
+    ? chatData
+    : {
+        name: "Not NeWorkers User",
+        photoURL:
+          "https://img.freepik.com/premium-vector/banned-icon-template-e_79145-490.jpg",
+      };
   const sendMsgHandler = (e) => {
     e.preventDefault();
-    console.log(input);
+    db.collection("users").doc(user.uid).set(
+      {
+        lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
+      },
+      {
+        merge: true,
+      }
+    );
+
+    db.collection("chats").doc(router.query.chatId).collection("messages").add({
+      message: input,
+      lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
+      userName: user.displayName,
+      photoURL: user.photoURL,
+    });
     setInput("");
   };
   return (
     <div className="flex-1 flex flex-col rounded-xl bg-gray-900">
       <div className="livechat-header px-2 flex justify-between items-center rounded-t-xl bg-black h-12 ">
-        <div className="conv h-12 flex items-center space-x-2 text-xs text-gray-300">
-          <img
-            src="https://www.shutterstock.com/image-photo/young-handsome-man-possing-modeling-260nw-1306661410.jpg"
-            className="w-6 h-6 rounded-full object-cover"
-          />
-          <span>
-            Conversation with{" "}
-            <span className="text-sm text-gray-200 text-bold">Badr Ali</span>
-          </span>
+        <div className="flex items-center space-x-2">
+          <img src={photoURL} className="w-6 h-6 rounded-full object-cover" />
+          <div className="conv h-12 flex items-center space-x-2 text-xs text-gray-300">
+            <span>
+              Conversation with{" "}
+              <span className="text-sm text-gray-200 text-bold">{name}</span>
+            </span>
+          </div>
+          <p className="text-xs text-gray-500">lastSeen....</p>
         </div>
         <div className="hidden-up md:flex space-x-2">
           <BookmarkSquareIcon className="header-icon" />
@@ -36,7 +90,7 @@ export default function LiveChat() {
         </div>
       </div>
       <div className="chat-messages flex-1 overflow-scroll scrollbar-hide">
-        {arr.map((ele, index) => {
+        {/* {arr.map((ele, index) => {
           return (
             <div
               key={index}
@@ -45,7 +99,9 @@ export default function LiveChat() {
               chat{" "}
             </div>
           );
-        })}
+        })} */}
+        {showMessage()}
+        <Message />
       </div>
       <footer>
         <form

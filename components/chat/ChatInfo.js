@@ -8,7 +8,13 @@ import {
 } from "@heroicons/react/24/outline";
 import Chat from "./Chat";
 function ChatInfo({ chatData }) {
-  const { name, photoURL, email } = chatData ? chatData : {};
+  const { name, photoURL, email } = chatData
+    ? chatData
+    : {
+        name: "Not NeWorkers User",
+        photoURL:
+          "https://img.freepik.com/premium-vector/banned-icon-template-e_79145-490.jpg",
+      };
   return (
     <div className="">
       <div className="flex flex-bottom flex-col bg-indigo-600 p-1 md:p-2 lg:p-4  m-2 rounded-xl">

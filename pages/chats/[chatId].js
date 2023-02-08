@@ -9,11 +9,11 @@ import { auth, db } from "../../firebase";
 import getRecipientEmail from "../../utils/RecipientEmail";
 
 function Chat({ messages, chat }) {
+  console.log(messages);
   const [user] = useAuthState(auth);
   const recipientEmail = getRecipientEmail(chat.chatGroup, user);
   const [users] = useCollectionDataOnce(db.collection("users"));
 
-  console.log(recipientEmail);
   const chatData = users?.find(
     (user) => recipientEmail && user.email === recipientEmail[0]
   );
@@ -22,7 +22,7 @@ function Chat({ messages, chat }) {
       <Head>
         <title>Chat with {chatData ? chatData.name : "a friend"}</title>
       </Head>
-      <div className="m-1 ml-0 border-2 border-gray-800 md:border-0 flex rounded-xl bg-gray-800  md:p-4  md:space-x-2 h-screen">
+      <div className="m-1 ml-0 border-2 border-gray-800 md:border-0 flex rounded-xl bg-gray-800  md:p-4  md:space-x-2 h-[556px]">
         <AllChats className="hidden md:flex" />
         <LiveChat chatData={chatData} messages={messages} />
         <ChatInfo chatData={chatData} />
