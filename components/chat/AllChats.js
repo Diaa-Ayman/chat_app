@@ -68,13 +68,9 @@ function AllChats(props) {
       </div>
       <hr />
       <div className="chats space-y-4 scrollbar-hide overflow-y-scroll flex-1 border-gray-700 rounded-md shadow-inner shadow-gray-900">
-        {chatSnapshot?.docs.map((chat) =>
-          chat.data().chatGroup.length > 0 ? (
-            <Chat group={chat.data().chatGroup} key={chat.id} id={chat.id} />
-          ) : (
-            <div className="text-xl text-red-600">NO CHATS</div>
-          )
-        )}
+        {chatSnapshot?.docs.map((chat) => (
+          <Chat group={chat.data().chatGroup} key={chat.id} id={chat.id} />
+        ))}
       </div>
     </div>
   );
