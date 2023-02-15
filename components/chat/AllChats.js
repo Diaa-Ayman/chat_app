@@ -16,9 +16,6 @@ function AllChats(props) {
     .where("chatGroup", "array-contains", user.email);
   const [chatSnapshot] = useCollection(userChatRef);
 
-  // const group = chatSnapshot?.docs.map((chat) => chat.data().chatGroup);
-  // console.log(group);
-
   const addNewChatHandler = () => {
     const chatEmail = prompt("Enter Chat Email!");
     setChatIsThere(chatAlreadyThere(chatEmail));
