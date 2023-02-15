@@ -19,14 +19,8 @@ export default function Header() {
     auth.signOut();
   };
   return (
-    <div className="px-4 md:px-6 lg:px-8 flex justify-between py-1 items-center bg-gray-800 text-gray-300">
+    <div className="px-4 md:px-6 lg:px-8 hidden lg:flex justify-between py-1 items-center bg-gray-800 text-gray-300">
       <div className="flex items-center">
-        <Link
-          href="/chats"
-          className="rounded-full hover:bg-gray-700 p-2 block lg:hidden"
-        >
-          <ArrowLeftIcon className="w-5 h-5 font-bold" />
-        </Link>
         <Link href="/" className="">
           <span className="m-2 text-xs md:text-md lg:text-base cursor-pointer">
             Ne
