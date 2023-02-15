@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <Layout className="">
       <div className="text-4xl grid place-items-center h-screen flex-1 space-y-0">
-        <div className="block md:hidden">
+        <div className="block mt-0 md:mt-4">
           <Link href="/chats">
             <button className="text-md text-white bg-green-500 rounded-3xl hover:bg-black border hover:text-red-500 hover:border-gray-100 cursor-pointer py-2 px-4 transition-all duration-500 animate-bounce">
               Go Chat!

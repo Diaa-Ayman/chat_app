@@ -11,10 +11,10 @@ function Message({ message, user }) {
     <div
       className={`text-white  text-md ${
         sender ? "bg-indigo-600 ml-auto" : "bg-gray-800"
-      } m-2 pt-1 px-3 rounded-lg min-w-[60px] pb-4 max-w-[200px] md:max-w-[400px] break-all overflow-hidden relative`}
+      } m-2 pt-1 px-3 rounded-lg min-w-[70px] w-fit pb-4 max-w-[200px] md:max-w-[400px] break-all overflow-hidden relative`}
     >
       <p className=""> {message.message}</p>
-      <p className="text-[8px] text-gray-300 absolute right-1 bottom-1 align-right">
+      <p className="text-[9px] text-gray-300 absolute right-1 bottom-1 align-right">
         {message.timeStamp ? moment(message.timeStamp).format("LT") : "..."}
       </p>
     </div>
