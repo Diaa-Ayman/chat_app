@@ -10,7 +10,7 @@ export default function Login() {
       <Head>
         <title>login</title>
       </Head>
-      <div className=" border-4 border-gray-600  shadow-white space-y-16 text-gray-400 bg-gray-900 w-fit px-8 pt-24 pb-20  flex items-center flex-col justify-center m-auto mt-16 md:mt-28 lg:mt-36">
+      <div className=" border-4 border-gray-600  shadow-white space-y-16 text-gray-400 bg-gray-900 w-fit px-8 pt-32 pb-24  flex items-center flex-col justify-center m-auto mt-16 md:mt-28 lg:mt-36">
         <span className="text-sm">
           Welcome to{" "}
           <span className="text-4xl text-white font-semibold">NeWorkers</span>

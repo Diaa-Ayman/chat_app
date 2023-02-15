@@ -73,6 +73,7 @@ export default function LiveChat({ chatData, messages }) {
   const sendMsgHandler = (e) => {
     e.preventDefault();
 
+    if (input.trim() === "" || input.length < 1) return;
     // update the last seen....
     db.collection("users").doc(user.uid).set(
       {
@@ -91,7 +92,7 @@ export default function LiveChat({ chatData, messages }) {
   };
 
   return (
-    <div className="flex-1 flex flex-col rounded-xl bg-gray-900">
+    <div className="flex flex-1 w-[100%]  md:w-auto flex-col rounded-xl bg-gray-900">
       <div className="livechat-header px-2 flex justify-between items-center rounded-t-xl bg-black h-12 ">
         <div className="flex items-center space-x-2">
           <img src={photoURL} className="w-6 h-6 rounded-full object-cover" />
