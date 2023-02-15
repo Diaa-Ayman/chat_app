@@ -9,11 +9,9 @@ import { auth, db } from "../../firebase";
 import getRecipientEmail from "../../utils/RecipientEmail";
 
 function Chat({ messages, chat }) {
-  console.log(messages);
   const [user] = useAuthState(auth);
   const recipientEmail = getRecipientEmail(chat.chatGroup, user);
   const [users] = useCollectionDataOnce(db.collection("users"));
-
   const chatData = users?.find(
     (user) => recipientEmail && user.email === recipientEmail[0]
   );
@@ -22,7 +20,7 @@ function Chat({ messages, chat }) {
       <Head>
         <title>Chat with {chatData ? chatData.name : "a friend"}</title>
       </Head>
-      <div className="m-1 ml-0 border-2 border-gray-800 md:border-0 flex rounded-xl bg-gray-800  md:p-4  md:space-x-2 h-[556px]">
+      <div className="m-1 border-2 border-gray-800 md:border-0 flex rounded-xl bg-gray-800  md:p-4  md:space-x-2 h-[450px] md:h-[520px] lg:h-[590px]">
         <AllChats className="hidden md:flex" />
         <LiveChat chatData={chatData} messages={messages} />
         <ChatInfo chatData={chatData} />
@@ -32,29 +30,26 @@ function Chat({ messages, chat }) {
 }
 export default Chat;
 
-export async function getServerSideProps(context) {
-  const ref = db.collection("chats").doc(context.query.chatId);
+export async function getServerSideProps(ctx) {
+  const ref = db.collection("chats").doc(ctx.query.chatId);
 
-  // userPrepareing
-
-  // to prepare messages on Server...
-
+  // PREP THE MESSAGES ON THE SERVER..
   const messagesRes = await ref
     .collection("messages")
     .orderBy("timeStamp", "asc")
     .get();
 
-  const messagesgetData = messagesRes.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  const messages = messagesRes.docs
+    .map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+    .map((messages) => ({
+      ...messages,
+      timeStamp: messages.timeStamp.toDate().getTime(),
+    }));
 
-  const messages = messagesgetData.map((messages) => ({
-    ...messages,
-    timeStamp: messages.timeStamp.toDate().getTime(),
-  }));
-
-  //  to prepare chat on server...
+  // PREP THE CHAT ON THE SERVER...
 
   const chatRes = await ref.get();
   const chat = {
@@ -64,7 +59,8 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      messages: JSON.stringify(messages),
+      messages: JSON.stringify(messages), // as it's more complex so stringify it send it on the server then
+      // return it as prop then convert it again.
       chat: chat,
     },
   };

@@ -7,16 +7,27 @@ import {
   ChatBubbleBottomCenterTextIcon,
   BellIcon,
   PhoneIcon,
+  ArrowRightOnRectangleIcon,
+  ArrowLeftIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 export default function Header() {
   const [user] = useAuthState(auth);
+  const logoutHandler = () => {
+    auth.signOut();
+  };
   return (
     <div className="px-4 md:px-6 lg:px-8 flex justify-between py-1 items-center bg-gray-800 text-gray-300">
       <div className="flex items-center">
-        <Link href="/">
+        <Link
+          href="/chats"
+          className="rounded-full hover:bg-gray-700 p-2 block lg:hidden"
+        >
+          <ArrowLeftIcon className="w-5 h-5 font-bold" />
+        </Link>
+        <Link href="/" className="">
           <span className="m-2 text-xs md:text-md lg:text-base cursor-pointer">
             Ne
             <span className="font-semibold text-md  text-gray-100">
@@ -69,18 +80,28 @@ export default function Header() {
             <BellIcon className="w-6 h-6" />
           </span>
         </div>
-        <div className="current-chat flex items-center space-x-1">
-          <div className="info hidden lg:flex flex-col text-right text-gray-200 text-xs md:text-sm">
-            <span className="">
-              Welcome, <span className="font-semibold">{user.displayName}</span>
-            </span>
-            <span className="text-xs text-gray-400">{user.email}</span>
+        <div className="flex items-center space-x-4">
+          <div className="current-chat flex items-center space-x-1">
+            <div className="info hidden lg:flex flex-col text-right text-gray-200 text-xs md:text-sm">
+              <span className="">
+                Welcome,{" "}
+                <span className="font-semibold">{user.displayName}</span>
+              </span>
+              <span className="text-xs text-gray-400">{user.email}</span>
+            </div>
+            <img
+              className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 rounded-full object-cover hover:opacity-90 cursor-pointer"
+              src={user.photoURL}
+              alt="cannot load image"
+            />
           </div>
-          <img
-            className="w-8 h-8 md:w-12 md:h-12 lg:w-10 lg:h-10 rounded-full object-cover hover:opacity-90 cursor-pointer"
-            src={user.photoURL}
-            alt="cannot load image"
-          />
+          <button
+            onClick={logoutHandler}
+            className=" text-lg rounded-full w-9 h-9 flex justify-center items-center font-semibold bg-red-600 text-gray-100 hover:bg-gray-100  hover:text-gray-800 transition-all duration-300"
+          >
+            {/* <span className="hidden lg:inline-block">Logout</span> */}
+            <ArrowRightOnRectangleIcon className="h-7 w-7" />
+          </button>
         </div>
       </div>
     </div>

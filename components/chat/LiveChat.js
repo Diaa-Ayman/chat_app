@@ -8,18 +8,24 @@ import {
   MicrophoneIcon,
 } from "@heroicons/react/24/outline";
 import { Router, useRouter } from "next/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollection } from "react-firebase-hooks/firestore";
+import {
+  useCollection,
+  useCollectionDataOnce,
+} from "react-firebase-hooks/firestore";
 import { auth, db } from "../../firebase";
 import Message from "../Message";
 import firebase from "firebase";
+import TimeAgo from "timeago-react";
 export default function LiveChat({ chatData, messages }) {
   const [input, setInput] = useState("");
+  const endOfMsg = useRef(null);
   const arr = [1, 2, 3, 4, 5, 6, 3, 3, 3, 3, 7, 8, 5, 4, 3, 4, 3];
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const [messageSnapshot] = useCollection(
+
+  const [messagesSnapshot] = useCollection(
     db
       .collection("chats")
       .doc(router.query.chatId)
@@ -27,9 +33,14 @@ export default function LiveChat({ chatData, messages }) {
       .orderBy("timeStamp", "asc")
   );
 
+  console.log(chatData);
+  // const [messagesOfComponent] = useCollectionDataOnce(
+  //   db.collection("chats").doc(router.query.chatId).collection("messages")
+  // );
+
   const showMessage = () => {
-    if (messageSnapshot) {
-      return messageSnapshot.docs.map((message) => (
+    if (messagesSnapshot) {
+      return messagesSnapshot.docs.map((message) => (
         <Message
           key={message.id}
           user={message.data().user}
@@ -45,6 +56,13 @@ export default function LiveChat({ chatData, messages }) {
       ));
     }
   };
+
+  const scrollToBottom = () => {
+    endOfMsg.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
   const { name, photoURL, lastSeen } = chatData
     ? chatData
     : {
@@ -54,23 +72,24 @@ export default function LiveChat({ chatData, messages }) {
       };
   const sendMsgHandler = (e) => {
     e.preventDefault();
+
+    // update the last seen....
     db.collection("users").doc(user.uid).set(
       {
         lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
       },
-      {
-        merge: true,
-      }
+      { merge: true }
     );
-
     db.collection("chats").doc(router.query.chatId).collection("messages").add({
+      timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
       message: input,
-      lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
-      userName: user.displayName,
+      user: user.email,
       photoURL: user.photoURL,
     });
     setInput("");
+    scrollToBottom();
   };
+
   return (
     <div className="flex-1 flex flex-col rounded-xl bg-gray-900">
       <div className="livechat-header px-2 flex justify-between items-center rounded-t-xl bg-black h-12 ">
@@ -82,7 +101,19 @@ export default function LiveChat({ chatData, messages }) {
               <span className="text-sm text-gray-200 text-bold">{name}</span>
             </span>
           </div>
-          <p className="text-xs text-gray-500">lastSeen....</p>
+          <p className="text-xs text-gray-500 ml-12">
+            {chatData ? (
+              <span>
+                {chatData?.lastSeen ? (
+                  <TimeAgo datetime={chatData?.lastSeen.toDate()} />
+                ) : (
+                  "loading..."
+                )}
+              </span>
+            ) : (
+              <span>Unavailable</span>
+            )}
+          </p>
         </div>
         <div className="hidden-up md:flex space-x-2">
           <BookmarkSquareIcon className="header-icon" />
@@ -90,18 +121,8 @@ export default function LiveChat({ chatData, messages }) {
         </div>
       </div>
       <div className="chat-messages flex-1 overflow-scroll scrollbar-hide">
-        {/* {arr.map((ele, index) => {
-          return (
-            <div
-              key={index}
-              className="text-lg text-white m-3 bg-blue-500 rounded-xl p-1 w-40"
-            >
-              chat{" "}
-            </div>
-          );
-        })} */}
         {showMessage()}
-        <Message />
+        <div className="mb-[50px]" ref={endOfMsg}></div>
       </div>
       <footer>
         <form

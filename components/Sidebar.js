@@ -6,6 +6,7 @@ import {
   ChatBubbleLeftRightIcon,
   TrashIcon,
   Bars3Icon,
+  ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import { auth } from "../firebase";
 
@@ -15,7 +16,7 @@ function Sidebar() {
   };
   return (
     <div className="hidden md:flex flex-col text-white md:w-40  m-2 md:m-4 mt-6">
-      <ul className="mb-40">
+      <ul className="mb-20 md:mb-24 lg:mb-44">
         <li className="sidebar-item md:hidden">
           <button
             type="button"
@@ -64,14 +65,6 @@ function Sidebar() {
           <span className="hidden-up">Trash</span>
         </li>
       </ul>
-      <div>
-        <button
-          onClick={logoutHandler}
-          className="py-1 px-8 text-lg font-semibold bg-red-600 text-gray-100 hover:bg-gray-100  hover:text-gray-800 transition-all duration-300 rounded-2xl"
-        >
-          Logout
-        </button>
-      </div>
     </div>
   );
 }

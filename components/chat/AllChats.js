@@ -47,7 +47,7 @@ function AllChats(props) {
       );
   };
   return (
-    <div className={`${props.className} flex-col space-y-4`}>
+    <div className={`${props.className} flex-col space-y-4 md:w-48`}>
       <div className="search-bar flex p-2 items-center space-x-1 bg-gray-900 rounded-xl">
         <MagnifyingGlassIcon className="text-gray-400 w-4 h-4 md:w-5 md:h-5 cursor-pointer hover:text-gray-100" />
         <input
