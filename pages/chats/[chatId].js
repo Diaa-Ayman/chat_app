@@ -16,11 +16,11 @@ function Chat({ messages, chat }) {
     (user) => recipientEmail && user.email === recipientEmail[0]
   );
   return (
-    <Layout>
+    <Layout hide>
       <Head>
         <title>Chat with {chatData ? chatData.name : "a friend"}</title>
       </Head>
-      <div className="m-1 border-2 border-gray-800 md:border-0 flex rounded-xl bg-gray-800  md:p-4  md:space-x-2 h-screen lg:h-[580px]">
+      <div className="m-0 lg:m-1 lg:border-2 border-gray-800 md:border-0 flex lg:rounded-xl bg-gray-800  md:p-4  md:space-x-2 h-screen lg:h-[580px]">
         <AllChats className="hidden md:flex" />
         <LiveChat chatData={chatData} messages={messages} />
         <ChatInfo chatData={chatData} />

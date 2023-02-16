@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 export default function Layout(props) {
   return (
     <main className="flex flex-col">
-      <Header />
+      <Header hide={props.hide} />
       <div className="flex flex-1">
         <Sidebar />
         <div className="flex-1">{props.children}</div>

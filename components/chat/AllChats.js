@@ -1,4 +1,5 @@
 import {
+  ArrowLeftIcon,
   ArrowSmallDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
@@ -8,6 +9,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useState } from "react";
+import Link from "next/link";
 function AllChats(props) {
   const [user] = useAuthState(auth);
   const [chatIsThere, setChatIsThere] = useState(false);
@@ -45,12 +47,20 @@ function AllChats(props) {
   };
   return (
     <div className={`${props.className} flex-col space-y-4 md:w-48`}>
-      <div className="search-bar flex p-2 items-center space-x-1 bg-gray-900 rounded-xl">
-        <MagnifyingGlassIcon className="text-gray-400 w-4 h-4 md:w-5 md:h-5 cursor-pointer hover:text-gray-100" />
-        <input
-          placeholder="Search"
-          className="outline-none bg-gray-900 text-gray-200 text-base placeholder:text-gray-400"
-        />
+      <div className="flex items-center mt-2 space-x-2">
+        <Link
+          href="/"
+          className="rounded-full  w-fit hover:bg-gray-700 p-2 block md:hidden"
+        >
+          <ArrowLeftIcon className="w-5 h-5 text-gray-200" />
+        </Link>
+        <div className="search-bar flex p-2 items-center space-x-1 bg-gray-900 rounded-xl">
+          <MagnifyingGlassIcon className="text-gray-400 w-4 h-4 md:w-5 md:h-5 cursor-pointer hover:text-gray-100" />
+          <input
+            placeholder="Search"
+            className="outline-none bg-gray-900 text-gray-200 text-base placeholder:text-gray-400"
+          />
+        </div>
       </div>
       <div className="mt-4 ml-2 space-y-2">
         <button

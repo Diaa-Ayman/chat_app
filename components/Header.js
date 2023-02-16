@@ -8,18 +8,22 @@ import {
   BellIcon,
   PhoneIcon,
   ArrowRightOnRectangleIcon,
-  ArrowLeftIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
-export default function Header() {
+export default function Header(props) {
   const [user] = useAuthState(auth);
   const logoutHandler = () => {
     auth.signOut();
   };
+
   return (
-    <div className="px-4 md:px-6 lg:px-8 hidden lg:flex justify-between py-1 items-center bg-gray-800 text-gray-300">
+    <div
+      className={`px-4 md:px-6 lg:px-8 ${
+        props.hide ? "hidden" : "flex"
+      } justify-between md:flex py-1 items-center bg-gray-800 text-gray-300`}
+    >
       <div className="flex items-center">
         <Link href="/" className="">
           <span className="m-2 text-xs md:text-md lg:text-base cursor-pointer">

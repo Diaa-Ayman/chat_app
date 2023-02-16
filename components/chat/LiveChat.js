@@ -98,8 +98,8 @@ export default function LiveChat({ chatData, messages }) {
   };
 
   return (
-    <div className="flex flex-1 mb-4  md:w-auto flex-col rounded-xl bg-gray-900">
-      <div className="livechat-header px-2 flex justify-between items-center rounded-t-xl bg-black h-12 ">
+    <div className="flex flex-1 mb-6  md:w-auto flex-col rounded-xl bg-gray-900">
+      <div className="livechat-header px-2 flex justify-between items-center lg:rounded-t-xl bg-black h-12 ">
         <div className="flex items-center space-x-2">
           <Link
             href="/chats"
