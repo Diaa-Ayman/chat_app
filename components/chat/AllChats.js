@@ -54,7 +54,7 @@ function AllChats(props) {
         >
           <ArrowLeftIcon className="w-5 h-5 text-gray-200" />
         </Link>
-        <div className="search-bar flex p-2 items-center space-x-1 bg-gray-900 rounded-xl">
+        <div className="search-bar flex-1 flex p-2 items-center space-x-1 bg-gray-900 rounded-xl">
           <MagnifyingGlassIcon className="text-gray-400 w-4 h-4 md:w-5 md:h-5 cursor-pointer hover:text-gray-100" />
           <input
             placeholder="Search"
